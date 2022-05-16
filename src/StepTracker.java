@@ -9,10 +9,11 @@ public class StepTracker {
     public StepTracker() {
         monthToData = new int[12][30];
     }
+
     public void saveSteps() {
         System.out.println("За какой месяц Вы хотите ввести шаги?");
-        System.out.println("Введите данные. Формат ввода: Январь это 0, февраль - 1 и т.п.");//в соответствии с ТЗ. В своей версии попробую исправить
-        int month = scanner.nextInt(); // если сделать scanner.nextInt() - 1 то можно по идеи сделать правильный отсчёт месяцев
+        System.out.println("Введите данные. Формат ввода: Январь это 0, февраль - 1 и т.п.");//в соответствии с ТЗ.
+        int month = scanner.nextInt(); // если сделать scanner.nextInt() - 1
         if (month > 11) {
             System.out.println("В нашем приложении крайний месяц - 11.");
         } else {
@@ -43,19 +44,19 @@ public class StepTracker {
 
 
     public int changeGoalSteps() {
-            System.out.println("Текущая цель: " + goalSteps + ".");
-            System.out.println("Введите новую цель: ");
-            int newGoalSteps = scanner.nextInt();
-            if (newGoalSteps < 0) {
-                System.out.println("Не бывает отрицательных значений, каждый шаг это большой плюс!");
-            } else {
-                goalSteps = newGoalSteps;
-                System.out.println("Ваша новая цель: " + goalSteps + "!");
-            }
-            return goalSteps;
+        System.out.println("Текущая цель: " + goalSteps + ".");
+        System.out.println("Введите новую цель: ");
+        int newGoalSteps = scanner.nextInt();
+        if (newGoalSteps < 0) {
+            System.out.println("Не бывает отрицательных значений, каждый шаг это большой плюс!");
+        } else {
+            goalSteps = newGoalSteps;
+            System.out.println("Ваша новая цель: " + goalSteps + "!");
+        }
+        return goalSteps;
     }
 
-    public void statsMonth () {
+    public void statsMonth() {
         System.out.println("Введите нужный Вам месяц. (от 0 до 11)");
         int month = scanner.nextInt();
         int sumStepsInMonth = 0; // сумма всех шагов
@@ -78,12 +79,18 @@ public class StepTracker {
                 beastSteps = 0;
             }
         }
-            System.out.println("Общее количество шагов за месяц: " + sumStepsInMonth + ".");
-            System.out.println("Максимальное пройденное количество шагов в месяце: " + maxStepsInMonth + ".");
-            System.out.println("Среднее количество шагов: " + meanSteps + ".");
-            System.out.println("Пройденная дистанция (в км): " + converter.stepsToKm(sumStepsInMonth) + ".");
-            System.out.println("Количество сожжённых килокалорий: " + converter.stepsToKcalories(sumStepsInMonth) + ".");
-            System.out.println("Лучшая серия*: " + beastSteps + ".");
-            System.out.println("*-максимальное количество подряд идущих дней, в течение которых количество шагов за день было равно или выше целевого.");
+        for (int j = 0; j < monthToData[month].length; j++) {
+            int days= j + 1;
+            System.out.print(days + " День " + ": " + monthToData[month][j] + "; ");
         }
+        System.out.println(monthToData[month].length +" день: " + monthToData[month][monthToData[month].length - 1] + ";");
+        System.out.println("Общее количество шагов за месяц: " + sumStepsInMonth + ".");
+        System.out.println("Максимальное пройденное количество шагов в месяце: " + maxStepsInMonth + ".");
+        System.out.println("Среднее количество шагов: " + meanSteps + ".");
+        System.out.println("Пройденная дистанция (в км): " + converter.stepsToKm(sumStepsInMonth) + ".");
+        System.out.println("Количество сожжённых килокалорий: " + converter.stepsToKcalories(sumStepsInMonth) + ".");
+        System.out.println("Лучшая серия*: " + maxSeriesDay + ".");
+        System.out.println("*-максимальное количество подряд идущих дней, в течение которых количество шагов за день было равно или выше целевого.");
     }
+}
+
